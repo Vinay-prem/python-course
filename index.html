@@ -1,0 +1,4162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Prism CSS for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+  <link rel="icon" href="icon-1.png" type="image/x-icon">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Course</title>
+ <style>
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .preloader .runner {
+      width: 80px;
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .preloader .runner:before,
+    .preloader .arm,
+    .preloader .leg {
+      content: '';
+      position: absolute;
+      background: #000;
+      border-radius: 50%;
+    }
+    
+    .preloader .runner:before {
+      width: 40px;
+      height: 40px;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: runnerAnim 1s infinite linear;
+    }
+    
+    .preloader .arm,
+    .preloader .leg {
+      width: 4px;
+      height: 40px;
+      background-color: #000;
+    }
+    
+    .preloader .arm.left {
+      top: 40px;
+      left: 10px;
+      transform-origin: top;
+      animation: armAnim 1s infinite linear;
+    }
+    
+    .preloader .arm.right {
+      top: 40px;
+      right: 10px;
+      transform-origin: top;
+      animation: armAnim 1s infinite linear;
+    }
+    
+    .preloader .leg.left {
+      top: 100px;
+      left: 20px;
+      transform-origin: top;
+      animation: legAnim 1s infinite linear;
+    }
+    
+    .preloader .leg.right {
+      top: 100px;
+      right: 20px;
+      transform-origin: top;
+      animation: legAnim 1s infinite linear;
+    }
+    
+    @keyframes runnerAnim {
+      0%, 50%, 100% { top: 20px; }
+      25%, 75% { top: 100px; }
+    }
+    
+    @keyframes armAnim {
+      0%, 50%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-45deg); }
+      75% { transform: rotate(45deg); }
+    }
+    
+    @keyframes legAnim {
+      0%, 50%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(45deg); }
+      75% { transform: rotate(-45deg); }
+    }
+    
+body {
+      background-color: #f8f9fa;
+    }
+    .jumbotron {
+      margin-top: 100px;
+      background-color: #343a40;
+      color: #fff;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+    }
+/* Complete CSS Styles */
+
+/* Body Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #0a4788;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999; /* Ensure navbar is on top */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggle {
+  color: white;
+  cursor: pointer;  
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.bar:nth-child(1) {
+  transform-origin: top left;
+}
+
+.bar:nth-child(2) {
+  transform-origin: center;
+}
+
+.bar:nth-child(3) {
+  transform-origin: bottom left;
+}
+
+.navbar-toggle:hover .bar {
+  background-color: #f1f1f1;
+}
+.card-title{
+  font-weight: bold;
+}
+
+/* Side Navigation Styles */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  z-index: 99; /* Ensure side nav is below navbar */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav a {
+  padding: 20px 10px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  border-bottom: 1px solid #333;
+}
+
+.sidenav a:last-child {
+  border-bottom: none;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+  background-color: #333;
+  border: 2PX solid rgb(11, 144, 253);
+}
+
+.sidenav a.closebtn {
+  position: absolute;
+  top: 15px; /* Adjust this value as needed */
+  right: 20px;
+  font-size: 36px;
+}
+
+.sidenav a.closebtn:hover {
+  color: #f44336;
+}
+
+/* Main Content Styles */
+.main-content {
+  margin-top: 70px; /* Adjust this value based on the height of the navbar */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+}
+/* Additional CSS for Enhanced Navigation */
+
+/* Navbar */
+.navbar {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggle:hover .bar {
+  background-color: #f1f1f1;
+}
+
+/* Side Navigation */
+.sidenav {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav a {
+  border-bottom: 1px solid #333;
+}
+
+.sidenav a:last-child {
+  border-bottom: none;
+}
+
+.sidenav a.closebtn:hover {
+  color: #f44336;
+}
+
+/* Main Content */
+.main-content {
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+}
+
+/* Hover Effects */
+.navbar a:hover {
+  color: #ffffff;
+}
+
+.sidenav a:hover {
+  color: #ffffff;
+  background-color: #333;
+}
+
+/* Transition Effects */
+.navbar-toggle .bar {
+  transition: background-color 0.3s ease;
+}
+
+.sidenav {
+  transition: width 0.5s ease;
+  padding-left: 0px;
+}
+
+.sidenav a {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 10px 20px;
+  
+}
+ </style>
+</head>
+<body>
+  
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="runner">
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+  
+<div class="navbar">
+  <div class="python-course" style="float: right; color: #f1f1f1; font-family: 'Times New Roman', Times, serif;">
+    <i class="fab fa-python"></i>  Python Course
+  </div>
+ 
+
+  <div class="navbar-toggle" onclick="toggleNav()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    
+  </div>
+</div>
+<div id="sideNav" class="sidenav">
+  <a href="#" onclick="closeNav()">&times;</a>
+  <ul>
+   
+    <ul class="navbar-nav flex-column">
+      <h3 style="color: white; font-size: larger; padding-top: 20px;">Introduction</h3>
+      <li class="nav-item">
+        <a class="nav-link" href="#module1">Module 1: Hello World</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module2">Module 2: Variables</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module3">Module 3: Data Types</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module4">Module 4: Comments & Connecting JS to HTML</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module5">Module 4.1: Programs Using All Data Types</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Operators</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module6">Module 5: Operators</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module7">Module 6: Program Using Assignment Operators</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module8">Module 7: Program Using Arithmetic Operators</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module9">Module 8: Program Using Logical Operators</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module10">Module 9: Program Using Bitwise Operators</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module11">Module 10: Program Using Special Operators</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Strings</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module12">Module 11: Strings Basics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module13">Module 12: Strings operations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module14">Module 13: Strings Methods</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module15">Module 14: String Formatting</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module16">Module 15: Strings searching and manupilation</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Control Structures</h3>
+      <li class="nav-item">
+        <a class="nav-link" href="#module17">Module 16: If Statements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module18">Module 17: If-Else Statements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module19">Module 18: If-Elif-Else Statements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module20">Module 19: Nested If Statements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module21">Module 20: Nested if program : Grade classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module22">Module 21: Nested if program : age group classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module23">Module 22: Nested if program : Temperature classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module24">Module 23: Nested if program : Time of day classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module25">Module 24: Nested if program : Day of week classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module26">Module 25: Nested if program : Ticket prize classification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module27">Module 26: Nested if program : Shipping Cost Calculation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module28">Module 27: Nested if program : Exam result evaluation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module29">Module 28: Nested if program : Bonus Calculation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module30">Module 29: Nested if program : Holiday Planning</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module31">Module 30: Pattern 1: Right Triangle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module32">Module 31: Pattern 2: Square</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module33">Module 32: Pattern 3: Hollow Rectangle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module34">Module 33: Pattern 4: Pyramid</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module35">Module 34: Pattern 5: Inverted Pyramid</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module36">Module 35: Pattern 6: Hollow Pyramid</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Loops</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module37">Module 36: Nested For Loop 1: Multiplication Table</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module38">Module 37: Nested For Loop 2: Pattern with Numbers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module39">Module 38: Nested For Loop 3: Pattern with Characters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module40">Module 39: Nested For Loop 4: Right Triangle with Numbers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module40">Module 40: Nested For Loop 5: Floyd's Triangle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module41">Module 41: While Loop 1: Countdown</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module42">Module 42: While Loop 2: Sum of Numbers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module43"> Module 43: While Loop 3: Factorial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module44">Module 44: While Loop 4: Fibonacci Series</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module45"> Module 45: While Loop 5: Prime Numbers</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Switch statement</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module46">Module 46: Switch Statement</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Control Statements</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module47">Module 47: Control Statements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module48">Module 48: Break Statement</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module49">Module 49: Continue Statement</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module50">Module 50: Pass Statement</a>
+      </li>
+      <!-- Add more modules here -->
+      <li class="nav-item">
+        <a class="nav-link" href="#module51">Module 51: Combination of Conditional and Control Structures</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Arrays</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module52">Module 52: Arrays in Python</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module53">Module 53: Array Operations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module54">Module 54: Multi-dimensional Arrays</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module55">Module 55: Array Slicing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module56">Module 56: Array Concatenation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module57">Module 57: Array Sorting</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module58">Module 58: Array Iteration</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Functions</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module59"> Module 59: Functions in Python</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module60">Module 60: Function Parameters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module61">Module 61: Default Parameters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module62"> Module 62: Return Statement</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module63">Module 63: Scope of Variables</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Lambda Functions</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module64">Module 64: Anonymous Functions (Lambda Functions)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module65">Module 65: Recursion</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Modules & Packages</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module66">Module 66: Modules and Packages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module67">Module 67: Built-in Functions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module68">Module 68: User-defined Functions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module69"> Module 69: Function with Default Arguments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module70">Module 70: Function with Variable Number of Arguments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module71">Module 71: Function with Keyword Arguments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module72">Module 72: Function with Arbitrary Keyword Arguments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module73">Module 73: Function with Combination of Arguments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module74">Module 74: Recursive Functions</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Pre-defined Functions</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module75">Module 75: Functions as Objects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module76"> Module 76: Predefined Functions: Part 1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module77">Module 77: Predefined Functions: Part 2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module78">Module 78: Predefined Functions: Part 3</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">OOPS</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module79">Module 79: Introduction to Object-Oriented Programming</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module80"> Module 80: Class and Object</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module81">Module 81: Inheritance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module82">Module 82: Polymorphism</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Types of Inheritance</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module83">Module 83: Single Inheritance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module84">Module 84: Multiple Inheritance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module85">Module 85: Multilevel Inheritance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module86"> Module 86: Hierarchical Inheritance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module87">Module 87: Hybrid Inheritance</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Encapsulation</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module88">Module 88: Encapsulation</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Overloading</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module89">Module 89: Method Overloading</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module90">Module 90: FunctionsModule 90: Operator Overloading</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Libraries</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module91">Module 91: Importing Standard Library</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module92"> Module 92: Importing Third-Party Libraries</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module93">Module 93: Working with datetime</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module94">Module 94: Working with JSON</a>
+      </li>
+      <h3 style="color: white; font-size: larger;">Data Structures</h3>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#module95">Module 95: Lists</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module96">Module 96: Tuples</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module97"> Module 97: Sets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module98">Module 98: Dictionaries</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module99">Module 99: Stacks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#module100">Module 100: Queues</a>
+      </li>
+      <!-- Add more modules here -->
+    
+  </ul>
+</div>
+
+
+<div class="container mt-4">
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to our Python Programming Course!</h1>
+    <p class="lead">Master the fundamentals of Python programming language with our comprehensive course. Whether you're a beginner or an experienced developer, we have something for everyone.</p>
+    <hr class="my-4">
+    <p>Enroll now and start your journey in the world of Python programming.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Enroll Now</a>
+  </div>
+
+  <!-- Module 1: Hello World -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" id="module1">
+          Module 1: Hello World
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Definition:</h5>
+          <p class="card-text">The "Hello World" program simply displays the message "Hello, World!" on the screen.</p>
+          <h5 class="card-title">How to Use:</h5>
+          <p class="card-text">This program is often used as a starting point to learn a new programming language and to verify that a development environment is correctly installed.</p>
+          <h5 class="card-title">Basic Syntax:</h5>
+          <pre><code class="language-python">
+print("Hello, World!")
+          </code></pre>
+          <button class="btn btn-primary copy-btn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 2: Variables -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" id="module2">
+          Module 2: Variables
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Definition:</h5>
+          <p class="card-text">A variable is a named location in memory that stores a value.</p>
+          <h5 class="card-title">How to Use:</h5>
+          <p class="card-text">Variables are used to store data that can be manipulated and referenced in a program.</p>
+          <h5 class="card-title">Basic Syntax:</h5>
+          <pre><code class="language-python">
+# Syntax for variable declaration:
+variable_name = value
+
+# Example:
+x = 10
+name = "John"
+          </code></pre>
+          <button class="btn btn-primary copy-btn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 3: Data Types -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" id="module3">
+          Module 3: Data Types
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Definition:</h5>
+          <p class="card-text">Data types in Python specify the type of data that variables can store.</p>
+          <h5 class="card-title">How to Use:</h5>
+          <p class="card-text">Choose the appropriate data type based on the nature of the data you want to store.</p>
+          <h5 class="card-title">Basic Syntax:</h5>
+          <pre><code class="language-python">
+# Example data types:
+x = 10          # Integer
+y = 3.14        # Float
+name = "John"   # String
+          </code></pre>
+          <button class="btn btn-primary copy-btn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 4: Comments, Connecting JS to HTML -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header" id="module4">
+          Module 4: CommentS in Python
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Definition:</h5>
+          <p class="card-text">Comments in Python are used to explain code and make it more readable.</p>
+          <h5 class="card-title">How to Use:</h5>
+          <p class="card-text">Use comments to document your code.</p>
+          <h5 class="card-title">Basic Syntax:</h5>
+          <pre><code class="language-python">
+# This is a single-line comment
+
+"""
+This is a multi-line comment
+"""
+          </code></pre>
+          <button class="btn btn-primary copy-btn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 4.1: Programs Using All Data Types -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Module 4.1: Programs Using All Data Types
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Example Program:</h5>
+          <pre><code class="language-python">
+# Program using all data types
+integer_var = 10
+float_var = 3.14
+string_var = "Hello, World!"
+boolean_var = True
+
+print("Integer Variable:", integer_var)
+print("Float Variable:", float_var)
+print("String Variable:", string_var)
+print("Boolean Variable:", boolean_var)
+          </code></pre>
+          <button class="btn btn-primary copy-btn">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 5: Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module5">
+      Module 5: Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Operators in Python are symbols that perform operations on operands.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use various types of operators such as assignment operators, arithmetic operators, logical operators, bitwise operators, and special operators to perform different operations.</p>
+      <!-- Add examples of different types of operators -->
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 6: Program Using Assignment Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module6">
+      Module 6: Program Using Assignment Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Example Program:</h5>
+      <pre><code class="language-python">
+# Program using assignment operators
+x = 10
+y = 5
+x += y  # Equivalent to x = x + y
+print("x =", x)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 7: Program Using Arithmetic Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module7">
+      Module 7: Program Using Arithmetic Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Example Program:</h5>
+      <pre><code class="language-python">
+# Program using arithmetic operators
+x = 10
+y = 3
+print("Sum:", x + y)
+print("Difference:", x - y)
+print("Product:", x * y)
+print("Quotient:", x / y)
+print("Remainder:", x % y)
+print("Exponentiation:", x ** y)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 8: Program Using Logical Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module8">
+      Module 8: Program Using Logical Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Example Program:</h5>
+      <pre><code class="language-python">
+# Program using logical operators
+x = 10
+y = 5
+z = 7
+print("AND Operator:", x > y and x > z)
+print("OR Operator:", x > y or x < z)
+print("NOT Operator:", not x > y)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 9: Program Using Bitwise Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module9">
+      Module 9: Program Using Bitwise Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Example Program:</h5>
+      <pre><code class="language-python">
+# Program using bitwise operators
+x = 10
+y = 5
+print("Bitwise AND Operator:", x & y)
+print("Bitwise OR Operator:", x | y)
+print("Bitwise XOR Operator:", x ^ y)
+print("Bitwise Left Shift Operator:", x << 1)
+print("Bitwise Right Shift Operator:", x >> 1)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 10: Program Using Special Operators -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module10">
+      Module 10: Program Using Special Operators
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Example Program:</h5>
+      <pre><code class="language-python">
+# Program using special operators
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+print("Concatenation Operator:", list1 + list2)
+print("Repetition Operator:", list1 * 3)
+print("Membership Operator:", 2 in list1)
+print("Identity Operator:", list1 is list2)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 11: String Basics -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module11">
+      Module 11: String Basics
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Strings in Python are sequences of characters, enclosed in single, double, or triple quotes.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use strings to represent textual data and perform various operations such as concatenation, slicing, and formatting.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of string declaration:
+str1 = 'Hello'
+str2 = "World"
+str3 = """Hello, World!"""
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 12: String Operations -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module12">
+      Module 12: String Operations
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">String operations in Python include methods for manipulating and formatting strings.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use string methods to perform operations such as concatenation, slicing, formatting, and searching within strings.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of string operations:
+str1 = "Hello"
+str2 = "World"
+concatenated_str = str1 + " " + str2
+print(concatenated_str)
+# Output: Hello World
+
+# Example of string slicing:
+str3 = "Python Programming"
+print(str3[0:6])
+# Output: Python
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 13: String Methods -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module13">
+      Module 13: String Methods
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">String methods in Python are built-in functions that perform various operations on strings.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use string methods to manipulate strings, such as converting case, splitting, joining, and searching within strings.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of string methods:
+str1 = "hello world"
+print(str1.upper())
+# Output: HELLO WORLD
+
+str2 = "python,programming,course"
+print(str2.split(","))
+# Output: ['python', 'programming', 'course']
+
+str3 = "  hello  "
+print(str3.strip())
+# Output: hello
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 14: String Formatting -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module14">
+      Module 14: String Formatting
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">String formatting in Python allows you to create formatted strings using placeholders.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use string formatting to insert values into a string with placeholders, such as %, format(), or f-strings.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of string formatting:
+name = "John"
+age = 30
+print("My name is %s and I am %d years old." % (name, age))
+
+# Using format() method
+print("My name is {} and I am {} years old.".format(name, age))
+
+# Using f-strings (Python 3.6+)
+print(f"My name is {name} and I am {age} years old.")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 15: String Searching and Manipulation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module15">
+      Module 15: String Searching and Manipulation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">String searching and manipulation in Python involve operations such as searching for substrings, replacing text, and stripping whitespace.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use string methods such as find(), replace(), and strip() to search for substrings, replace text, and manipulate strings.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of string searching and manipulation:
+str1 = "Python is a popular programming language"
+print(str1.find("Python"))
+# Output: 0
+
+print(str1.replace("Python", "Java"))
+# Output: Java is a popular programming language
+
+str2 = "   hello   "
+print(str2.strip())
+# Output: hello
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 16: If Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module16">
+      Module 16: If Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The if statement in Python is used to execute a block of code if a condition is true.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use the if statement followed by a condition to execute a block of code if the condition evaluates to true.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of if statement:
+x = 10
+if x > 5:
+  print("x is greater than 5")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 17: If-Else Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module17">
+      Module 17: If-Else Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The if-else statement in Python is used to execute one block of code if a condition is true and another block if the condition is false.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use the if-else statement to execute different blocks of code based on whether a condition is true or false.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of if-else statement:
+x = 10
+if x > 5:
+  print("x is greater than 5")
+else:
+  print("x is less than or equal to 5")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 18: If-Elif-Else Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module18">
+      Module 18: If-Elif-Else Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The if-elif-else statement in Python is used to execute one block of code among several alternatives.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use the if-elif-else statement to choose among multiple blocks of code based on different conditions.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of if-elif-else statement:
+x = 10
+if x > 10:
+  print("x is greater than 10")
+elif x == 10:
+  print("x is equal to 10")
+else:
+  print("x is less than 10")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 19: Nested If Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module19">
+      Module 19: Nested If Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Nested if statements in Python are if statements inside another if statement.</p>
+      <h5 class="card-title">How to Use:</h5>
+      <p class="card-text">Use nested if statements to evaluate multiple conditions, where the inner if statement is executed only if the outer if statement's condition is true.</p>
+      <h5 class="card-title">Basic Syntax:</h5>
+      <pre><code class="language-python">
+# Example of nested if statement:
+x = 10
+if x > 5:
+  print("x is greater than 5")
+  if x == 10:
+      print("x is equal to 10")
+  else:
+      print("x is not equal to 10")
+else:
+  print("x is less than or equal to 5")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 20: Grade Classification -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module20">
+      Module 20: Grade Classification
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Classify student grades based on score ranges.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+score = 85
+if score >= 90:
+  grade = 'A'
+elif score >= 80:
+  grade = 'B'
+elif score >= 70:
+  grade = 'C'
+elif score >= 60:
+  grade = 'D'
+else:
+  grade = 'F'
+print("Your grade is:", grade)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 21: Age Group Classification -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module21">
+      Module 21: Age Group Classification
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Classify age groups based on age ranges.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+age = 25
+if age < 18:
+  group = 'Teenager'
+elif age >= 18 and age < 60:
+  group = 'Adult'
+else:
+  group = 'Senior'
+print("You belong to the", group, "age group.")
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 22: Temperature Classification -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module22">
+      Module 22: Temperature Classification
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Classify temperatures as low, moderate, or high based on temperature values.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+temperature = 30
+if temperature < 10:
+  category = 'Low'
+elif temperature >= 10 and temperature < 30:
+  category = 'Moderate'
+else:
+  category = 'High'
+print("The temperature is classified as", category)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 23: Time of Day Classification -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module23">
+      Module 23: Time of Day Classification
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Classify time of day as morning, afternoon, evening, or night based on hour ranges.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+hour = 15
+if hour >= 5 and hour < 12:
+  time_of_day = 'Morning'
+elif hour >= 12 and hour < 17:
+  time_of_day = 'Afternoon'
+elif hour >= 17 and hour < 20:
+  time_of_day = 'Evening'
+else:
+  time_of_day = 'Night'
+print("It is currently", time_of_day)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 24: Day of Week Classification -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module24">
+      Module 24: Day of Week Classification
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Classify days of the week as weekdays or weekends based on day names.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+day = 'Sunday'
+if day == 'Saturday' or day == 'Sunday':
+  classification = 'Weekend'
+else:
+  classification = 'Weekday'
+print("It is a", classification)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 25: Ticket Price Calculation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module25">
+      Module 25: Ticket Price Calculation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Calculate the ticket price based on age and movie type.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+age = 20
+movie_type = 'Regular'
+
+if age < 12:
+  ticket_price = 8
+elif age >= 12 and age < 18:
+  ticket_price = 10
+elif age >= 18:
+  if movie_type == 'Regular':
+      ticket_price = 12
+  else:
+      ticket_price = 15
+
+print("Ticket Price:", ticket_price)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 26: Shipping Cost Calculation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module26">
+      Module 26: Shipping Cost Calculation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Calculate the shipping cost based on weight and shipping method.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+weight = 5
+shipping_method = 'Express'
+
+if weight <= 1:
+  shipping_cost = 5
+elif weight > 1 and weight <= 5:
+  shipping_cost = 10
+elif weight > 5:
+  if shipping_method == 'Express':
+      shipping_cost = 20
+  else:
+      shipping_cost = 15
+
+print("Shipping Cost:", shipping_cost)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 27: Exam Result Evaluation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module27">
+      Module 27: Exam Result Evaluation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Evaluate exam results and provide feedback based on scores in different subjects.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+math_score = 85
+science_score = 75
+english_score = 90
+
+average_score = (math_score + science_score + english_score) / 3
+
+if average_score >= 90:
+  feedback = 'Excellent'
+elif average_score >= 80:
+  feedback = 'Good'
+elif average_score >= 70:
+  feedback = 'Satisfactory'
+else:
+  feedback = 'Needs Improvement'
+
+print("Feedback:", feedback)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 28: Bonus Calculation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module28">
+      Module 28: Bonus Calculation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Calculate bonus based on performance rating and salary.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+performance_rating = 4
+salary = 50000
+
+if performance_rating == 5:
+  bonus = salary * 0.2
+elif performance_rating == 4:
+  bonus = salary * 0.15
+elif performance_rating == 3:
+  bonus = salary * 0.1
+else:
+  bonus = 0
+
+print("Bonus:", bonus)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 29: Holiday Planning -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module29">
+      Module 29: Holiday Planning
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Plan holidays based on available budget and destination preferences.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+budget = 3000
+destination = 'Beach'
+
+if destination == 'Mountains':
+  if budget >= 5000:
+      plan = 'Go for a trekking expedition'
+  else:
+      plan = 'Explore nearby hills and enjoy the scenery'
+elif destination == 'Beach':
+  if budget >= 4000:
+      plan = 'Book a beach resort and relax by the sea'
+  else:
+      plan = 'Visit a nearby beach and spend the day'
+else:
+  plan = 'Staycation at home'
+
+print("Holiday Plan:", plan)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 35: Pattern 1: Right Triangle -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module30">
+      Module 30: Pattern 1: Right Triangle
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a right triangle pattern using numbers.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(1, rows + 1):
+  print('* ' * i)
+# Output:
+# *
+# * *
+# * * *
+# * * * *
+# * * * * *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 36: Pattern 2: Square -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module31">
+      Module 31: Pattern 2: Square
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a square pattern using asterisks.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+side = 5
+
+for i in range(side):
+  print('* ' * side)
+# Output:
+# * * * * *
+# * * * * *
+# * * * * *
+# * * * * *
+# * * * * *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 37: Pattern 3: Hollow Rectangle -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module32">
+      Module 32: Pattern 3: Hollow Rectangle
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a hollow rectangle pattern using asterisks.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+cols = 10
+
+for i in range(rows):
+  if i == 0 or i == rows - 1:
+      print('* ' * cols)
+  else:
+      print('* ' + '  ' * (cols - 2) + '*')
+# Output:
+# * * * * * * * * * *
+# *                 *
+# *                 *
+# *                 *
+# * * * * * * * * * *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 38: Pattern 4: Pyramid -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module33">
+      Module 33: Pattern 4: Pyramid
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a pyramid pattern using asterisks.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(1, rows + 1):
+  print(' ' * (rows - i) + '* ' * i)
+# Output:
+#     *
+#    * *
+#   * * *
+#  * * * *
+# * * * * *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 39: Pattern 5: Inverted Pyramid -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module34">
+      Module 34: Pattern 5: Inverted Pyramid
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print an inverted pyramid pattern using asterisks.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(rows, 0, -1):
+  print(' ' * (rows - i) + '* ' * i)
+# Output:
+# * * * * *
+#  * * * *
+#   * * *
+#    * *
+#     *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 40: Pattern 6: Hollow Pyramid -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module35">
+      Module 35: Pattern 6: Hollow Pyramid
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a hollow pyramid pattern using asterisks.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(1, rows + 1):
+  if i == 1 or i == rows:
+      print(' ' * (rows - i) + '* ' * i)
+  else:
+      print(' ' * (rows - i) + '* ' + ' ' * (2 * i - 3) + '* ')
+# Output:
+#     *
+#    * *
+#   *   *
+#  *     *
+# * * * * *
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 36: Nested For Loop 1: Multiplication Table -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module36">
+      Module 36: Nested For Loop 1: Multiplication Table
+    </div>
+    <div class="card-body" >
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a multiplication table using nested for loops.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+for i in range(1, 11):
+  for j in range(1, 11):
+      print(i * j, end='\t')
+  print()
+# Output:
+# 1   2   3   4   5   6   7   8   9   10  
+# 2   4   6   8   10  12  14  16  18  20  
+# 3   6   9   12  15  18  21  24  27  30  
+# 4   8   12  16  20  24  28  32  36  40  
+# 5   10  15  20  25  30  35  40  45  50  
+# 6   12  18  24  30  36  42  48  54  60  
+# 7   14  21  28  35  42  49  56  63  70  
+# 8   16  24  32  40  48  56  64  72  80  
+# 9   18  27  36  45  54  63  72  81  90  
+# 10  20  30  40  50  60  70  80  90  100 
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 37: Nested For Loop 2: Pattern with Numbers -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module37">
+      Module 37: Nested For Loop 2: Pattern with Numbers
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a pattern with numbers using nested for loops.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(1, rows + 1):
+  for j in range(1, i + 1):
+      print(j, end=' ')
+  print()
+# Output:
+# 1 
+# 1 2 
+# 1 2 3 
+# 1 2 3 4 
+# 1 2 3 4 5 
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 38: Nested For Loop 3: Pattern with Characters -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module38">
+      Module 38: Nested For Loop 3: Pattern with Characters
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a pattern with characters using nested for loops.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+ascii_value = 65
+
+for i in range(1, rows + 1):
+  for j in range(ascii_value, ascii_value + i):
+      print(chr(j), end=' ')
+  print()
+  ascii_value += 1
+# Output:
+# A 
+# B C 
+# C D E 
+# D E F G 
+# E F G H I 
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 39: Nested For Loop 4: Right Triangle with Numbers -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module39">
+      Module 39: Nested For Loop 4: Right Triangle with Numbers
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print a right triangle pattern with numbers using nested for loops.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+
+for i in range(1, rows + 1):
+  for j in range(1, i + 1):
+      print(j, end=' ')
+  print()
+# Output:
+# 1 
+# 1 2 
+# 1 2 3 
+# 1 2 3 4 
+# 1 2 3 4 5 
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 40: Nested For Loop 5: Floyd's Triangle -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module40">
+      Module 40: Nested For Loop 5: Floyd's Triangle
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print Floyd's Triangle using nested for loops.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+rows = 5
+number = 1
+
+for i in range(1, rows + 1):
+  for j in range(1, i + 1):
+      print(number, end=' ')
+      number += 1
+  print()
+# Output:
+# 1 
+# 2 3 
+# 4 5 6 
+# 7 8 9 10 
+# 11 12 13 14 15 
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 41: While Loop 1: Countdown -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module41">
+      Module 41: While Loop 1: Countdown
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Count down from a given number using a while loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+count = 10
+
+while count > 0:
+  print(count)
+  count -= 1
+# Output:
+# 10
+# 9
+# 8
+# 7
+# 6
+# 5
+# 4
+# 3
+# 2
+# 1
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 42: While Loop 2: Sum of Numbers -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module42">
+      Module 42: While Loop 2: Sum of Numbers
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Calculate the sum of numbers up to a given number using a while loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+n = 5
+sum = 0
+count = 1
+
+while count <= n:
+  sum += count
+  count += 1
+
+print("Sum =", sum)
+# Output:
+# Sum = 15
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 43: While Loop 3: Factorial -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module43">
+      Module 43: While Loop 3: Factorial
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Calculate the factorial of a number using a while loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+n = 5
+factorial = 1
+count = 1
+
+while count <= n:
+  factorial *= count
+  count += 1
+
+print("Factorial =", factorial)
+# Output:
+# Factorial = 120
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 44: While Loop 4: Fibonacci Series -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module44">
+      Module 44: While Loop 4: Fibonacci Series
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Generate the Fibonacci series using a while loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+n = 10
+a, b = 0, 1
+count = 0
+
+while count < n:
+  print(a, end=' ')
+  a, b = b, a + b
+  count += 1
+# Output:
+# 0 1 1 2 3 5 8 13 21 34
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 45: While Loop 5: Prime Numbers -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module45">
+      Module 45: While Loop 5: Prime Numbers
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Print prime numbers up to a given number using a while loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+n = 10
+num = 2
+
+while num <= n:
+  prime = True
+  divisor = 2
+  while divisor <= num / 2:
+      if num % divisor == 0:
+          prime = False
+          break
+      divisor += 1
+  if prime:
+      print(num, end=' ')
+  num += 1
+# Output:
+# 2 3 5 7
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 46: Switch Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module46">
+      Module 46: Switch Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A switch statement is a control statement that allows a program to evaluate an expression and execute a block of code depending on the expression's value.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of switch statements in Python.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+def switch_case(argument):
+  switcher = {
+      1: "January",
+      2: "February",
+      3: "March",
+      4: "April",
+      5: "May",
+      6: "June",
+      7: "July",
+      8: "August",
+      9: "September",
+      10: "October",
+      11: "November",
+      12: "December"
+  }
+  return switcher.get(argument, "Invalid month")
+
+month_number = 6
+print("Month:", switch_case(month_number))
+# Output:
+# Month: June
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 47: Control Statements -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module47">
+      Module 47: Control Statements
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Control statements are statements that alter the flow of program execution based on specified conditions. They include if-else, switch, while, for, and more.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore various control statements and their usage in Python.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of if-else statement
+x = 10
+if x > 0:
+  print("Positive")
+elif x < 0:
+  print("Negative")
+else:
+  print("Zero")
+
+# Output: Positive
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 48: Break Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module48">
+      Module 48: Break Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The break statement is used to exit a loop prematurely based on a specified condition.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of the break statement in a loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of using break statement
+for i in range(1, 11):
+  if i == 5:
+      break
+  print(i, end=' ')
+# Output: 1 2 3 4
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 49: Continue Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module49">
+      Module 49: Continue Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The continue statement is used to skip the rest of the code inside a loop for the current iteration and proceed to the next iteration.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of the continue statement in a loop.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of using continue statement
+for i in range(1, 11):
+  if i % 2 == 0:
+      continue
+  print(i, end=' ')
+# Output: 1 3 5 7 9
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 50: Pass Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module50">
+      Module 50: Pass Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The pass statement is a null operation used as a placeholder when a statement is syntactically required but you do not want any code or action to execute.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of the pass statement.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of using pass statement
+x = 10
+if x > 0:
+  pass  # No action required for positive numbers
+else:
+  print("Negative")
+# No output
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 51: Combination of Conditional and Control Structures -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module51">
+      Module 51: Combination of Conditional and Control Structures
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A combination of conditional and control structures involves using if-else statements within loops to control the flow of execution based on conditions.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of if-else statements within a for loop to perform specific actions based on conditions.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of combination of conditional and control structures
+for i in range(1, 11):
+  if i % 2 == 0:
+      print(i, "is even")
+  else:
+      print(i, "is odd")
+# Output:
+# 1 is odd
+# 2 is even
+# 3 is odd
+# 4 is even
+# 5 is odd
+# 6 is even
+# 7 is odd
+# 8 is even
+# 9 is odd
+# 10 is even
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 52: Arrays in Python -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module52">
+      Module 52: Arrays in Python
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">An array is a data structure that stores a collection of elements, each identified by at least one array index or key.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore the usage of arrays in Python to store and manipulate collections of elements.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of arrays in Python using lists
+my_array = [1, 2, 3, 4, 5]
+
+# Accessing elements
+print("Element at index 2:", my_array[2])
+
+# Modifying elements
+my_array[3] = 10
+print("Modified array:", my_array)
+
+# Output:
+# Element at index 2: 3
+# Modified array: [1, 2, 3, 10, 5]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 53: Array Operations -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module53">
+      Module 53: Array Operations
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Array operations involve various actions performed on arrays, such as element access, modification, addition, deletion, and more.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate common array operations in Python using built-in functions and methods.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of array operations
+my_array = [1, 2, 3, 4, 5]
+
+# Length of the array
+print("Length of array:", len(my_array))
+
+# Adding elements
+my_array.append(6)
+print("Array after adding element:", my_array)
+
+# Removing elements
+my_array.remove(3)
+print("Array after removing element:", my_array)
+
+# Output:
+# Length of array: 5
+# Array after adding element: [1, 2, 3, 4, 5, 6]
+# Array after removing element: [1, 2, 4, 5, 6]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 54: Multi-dimensional Arrays -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module54">
+      Module 54: Multi-dimensional Arrays
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Multi-dimensional arrays are arrays that contain other arrays as elements, forming a matrix or higher-dimensional structure.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore the usage of multi-dimensional arrays in Python for representing matrices and higher-dimensional data.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of multi-dimensional arrays
+matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+# Accessing elements
+print("Element at (1, 2):", matrix[1][2])
+
+# Output:
+# Element at (1, 2): 6
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 55: Array Slicing -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module55">
+      Module 55: Array Slicing
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Array slicing is a technique to extract a subarray from a given array by specifying start and end indices.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to perform array slicing in Python to extract specific portions of an array.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of array slicing
+my_array = [1, 2, 3, 4, 5]
+
+# Extracting a subarray
+sub_array = my_array[1:4]
+print("Subarray:", sub_array)
+
+# Output:
+# Subarray: [2, 3, 4]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 56: Array Concatenation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module56">
+      Module 56: Array Concatenation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Array concatenation is the process of combining two or more arrays into a single array.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to concatenate arrays in Python to create larger arrays from smaller ones.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of array concatenation
+array1 = [1, 2, 3]
+array2 = [4, 5, 6]
+
+# Concatenating arrays
+concatenated_array = array1 + array2
+print("Concatenated array:", concatenated_array)
+
+# Output:
+# Concatenated array: [1, 2, 3, 4, 5, 6]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 57: Array Sorting -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module57">
+      Module 57: Array Sorting
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Array sorting involves arranging the elements of an array in a specific order, such as ascending or descending.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Show how to sort arrays in Python using built-in functions or methods.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of array sorting
+my_array = [3, 1, 4, 2, 5]
+
+# Sorting array in ascending order
+sorted_array = sorted(my_array)
+print("Sorted array (ascending):", sorted_array)
+
+# Sorting array in descending order
+reverse_sorted_array = sorted(my_array, reverse=True)
+print("Sorted array (descending):", reverse_sorted_array)
+
+# Output:
+# Sorted array (ascending): [1, 2, 3, 4, 5]
+# Sorted array (descending): [5, 4, 3, 2, 1]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 58: Array Iteration -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module58">
+      Module 58: Array Iteration
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Array iteration involves traversing through each element of an array and performing some operation on it.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate various methods for iterating over arrays in Python, such as using loops or built-in functions.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of array iteration
+my_array = [1, 2, 3, 4, 5]
+
+# Using a for loop
+for element in my_array:
+  print(element, end=' ')
+
+# Using list comprehension
+squared_array = [x**2 for x in my_array]
+print("\nSquared array:", squared_array)
+
+# Output:
+# 1 2 3 4 5 
+# Squared array: [1, 4, 9, 16, 25]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 59: Functions in Python -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module59">
+      Module 59: Functions in Python
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A function is a block of reusable code that performs a specific task. It can take inputs, perform operations, and return outputs.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore the creation, usage, and benefits of functions in Python to organize and simplify code.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of a function in Python
+def greet(name):
+  print("Hello, " + name + "!")
+  
+# Calling the function
+greet("Alice")
+# Output: Hello, Alice!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 60: Function Parameters -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module60">
+      Module 60: Function Parameters
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Function parameters are placeholders for data that can be passed into a function when it is called. They allow functions to accept inputs and perform actions based on those inputs.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of function parameters in Python to make functions more flexible and reusable.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function parameters
+def add(a, b):
+  return a + b
+  
+# Calling the function with arguments
+result = add(3, 5)
+print("Result:", result)
+# Output: Result: 8
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 61: Default Parameters -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module61">
+      Module 61: Default Parameters
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Default parameters are parameters that have default values assigned to them. If no value is provided for these parameters when the function is called, the default value is used.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate the usage of default parameters in Python functions to specify default values for arguments.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of default parameters
+def greet(name="World"):
+  print("Hello, " + name + "!")
+  
+# Calling the function with and without arguments
+greet("Alice")
+greet()
+# Output: Hello, Alice!
+# Hello, World!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 62: Return Statement -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module62">
+      Module 62: Return Statement
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The return statement is used to exit a function and return a value or multiple values back to the caller.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Show how to use the return statement in Python functions to return results to the caller.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of return statement
+def add(a, b):
+  return a + b
+  
+# Calling the function and storing the result
+result = add(3, 5)
+print("Result:", result)
+# Output: Result: 8
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 63: Scope of Variables -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module63">
+      Module 63: Scope of Variables
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The scope of a variable refers to the region of the code where the variable is accessible. Variables can have global or local scope.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explain the concept of variable scope in Python and how it affects the visibility and accessibility of variables within functions.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of variable scope
+x = 10  # Global variable
+
+def func():
+  y = 20  # Local variable
+  print("Inside func, x:", x)  # Accessing global variable
+  print("Inside func, y:", y)
+
+# Calling the function
+func()
+print("Outside func, x:", x)  # Accessing global variable
+# Output:
+# Inside func, x: 10
+# Inside func, y: 20
+# Outside func, x: 10
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 64: Anonymous Functions (Lambda Functions) -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module64">
+      Module 64: Anonymous Functions (Lambda Functions)
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Anonymous functions, also known as lambda functions, are small, inline functions that do not have a name and can have only one expression. They are often used for short, simple operations.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore the usage of lambda functions in Python for creating small, concise functions on the fly.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of lambda function
+add = lambda x, y: x + y
+
+# Calling the lambda function
+result = add(3, 5)
+print("Result:", result)
+# Output: Result: 8
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 65: Recursion -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module65">
+      Module 65: Recursion
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Recursion is a programming technique where a function calls itself in order to solve problems that can be broken down into smaller, similar subproblems.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how recursion works in Python by solving problems such as factorial calculation and Fibonacci sequence generation.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of recursion (factorial calculation)
+def factorial(n):
+  if n == 0:
+      return 1
+  else:
+      return n * factorial(n - 1)
+
+# Calculating factorial of 5
+result = factorial(5)
+print("Factorial of 5:", result)
+# Output: Factorial of 5: 120
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 66: Modules and Packages -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module66">
+      Module 66: Modules and Packages
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Modules are Python files that contain reusable code, and packages are directories that contain multiple modules. They allow for code organization and reuse.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explain how to create and use modules and packages in Python to organize code into logical units and facilitate code reuse.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of module and package usage
+# Importing a module
+import math
+
+# Using functions from the math module
+print("Square root of 16:", math.sqrt(16))
+# Output: Square root of 16: 4.0
+
+# Importing from a package
+import pandas as pd
+
+# Using functions from the pandas package
+data = {'Name': ['Alice', 'Bob', 'Charlie'], 'Age': [25, 30, 35]}
+df = pd.DataFrame(data)
+print(df)
+# Output:
+#       Name  Age
+# 0    Alice   25
+# 1      Bob   30
+# 2  Charlie   35
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 67: Built-in Functions -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module67">
+      Module 67: Built-in Functions
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Built-in functions are functions that are pre-defined in Python and can be directly used without requiring explicit import statements.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore some commonly used built-in functions in Python for tasks such as type conversion, mathematical operations, and string manipulation.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of built-in functions
+# Type conversion
+num_str = "123"
+num = int(num_str)
+print("Converted integer:", num)
+# Output: Converted integer: 123
+
+# Mathematical operations
+print("Absolute value of -5:", abs(-5))
+# Output: Absolute value of -5: 5
+
+# String manipulation
+print("Uppercase of 'hello':", "hello".upper())
+# Output: Uppercase of 'hello': HELLO
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 68: User-defined Functions -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module68">
+      Module 68: User-defined Functions
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">User-defined functions are functions created by the user to perform specific tasks. They provide a way to modularize code and promote code reuse.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the creation and usage of user-defined functions in Python to encapsulate and reuse pieces of code.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of user-defined function
+def greet(name):
+  print("Hello, " + name + "!")
+  
+# Calling the user-defined function
+greet("Alice")
+# Output: Hello, Alice!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 69: Function with Default Arguments -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module69">
+      Module 69: Function with Default Arguments
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Functions in Python can have default arguments, which are parameters that take a default value if no argument value is provided during the function call.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to define functions with default arguments to provide flexibility and handle different use cases.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function with default arguments
+def greet(name="World"):
+  print("Hello, " + name + "!")
+  
+# Calling the function with and without arguments
+greet("Alice")
+greet()
+# Output: Hello, Alice!
+# Hello, World!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 70: Function with Variable Number of Arguments -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module70">
+      Module 70: Function with Variable Number of Arguments
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Python allows defining functions with a variable number of arguments using special syntax. These functions can accept any number of arguments during function invocation.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to create functions with variable-length argument lists to handle situations where the number of input arguments is not fixed.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function with variable number of arguments
+def add(*args):
+  result = 0
+  for num in args:
+      result += num
+  return result
+  
+# Calling the function with different numbers of arguments
+print("Sum:", add(1, 2, 3))
+print("Sum:", add(5, 10))
+# Output: Sum: 6
+# Sum: 15
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 71: Function with Keyword Arguments -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module71">
+      Module 71: Function with Keyword Arguments
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Python functions can accept keyword arguments, which are passed with a keyword and a corresponding value. These arguments provide more flexibility and clarity in function calls.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore the usage of keyword arguments in Python functions to improve readability and allow parameters to be specified in any order.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function with keyword arguments
+def greet(name, message):
+  print("Hello, " + name + "! " + message)
+  
+# Calling the function with keyword arguments
+greet(name="Alice", message="How are you?")
+greet(message="Nice to meet you!", name="Bob")
+# Output:
+# Hello, Alice! How are you?
+# Hello, Bob! Nice to meet you!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 72: Function with Arbitrary Keyword Arguments -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module72">
+      Module 72: Function with Arbitrary Keyword Arguments
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Python functions can accept arbitrary keyword arguments using the double asterisk (**kwargs) syntax. These arguments are passed as a dictionary of key-value pairs.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate the usage of arbitrary keyword arguments in Python functions to handle additional named parameters without specifying them beforehand.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function with arbitrary keyword arguments
+def greet(**kwargs):
+  for key, value in kwargs.items():
+      print(key + ": " + value)
+  
+# Calling the function with arbitrary keyword arguments
+greet(name="Alice", message="How are you?", age="30")
+# Output:
+# name: Alice
+# message: How are you?
+# age: 30
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 73: Function with Combination of Arguments -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module73">
+      Module 73: Function with Combination of Arguments
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Python functions can combine different types of arguments, including positional arguments, default arguments, variable-length arguments, keyword arguments, and arbitrary keyword arguments.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to define functions with a combination of different types of arguments to handle various use cases and provide flexibility in function calls.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function with combination of arguments
+def greet(name, message="Hello", *args, **kwargs):
+  print(message + ", " + name + "!")
+  if args:
+      print("Additional arguments:", args)
+  if kwargs:
+      print("Additional keyword arguments:", kwargs)
+  
+# Calling the function with different types of arguments
+greet("Alice")
+greet("Bob", "Hi", 1, 2, 3, age=30)
+# Output:
+# Hello, Alice!
+# Hi, Bob!
+# Additional arguments: (1, 2, 3)
+# Additional keyword arguments: {'age': 30}
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 74: Recursive Functions -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module74">
+      Module 74: Recursive Functions
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Recursive functions are functions that call themselves, either directly or indirectly, to solve problems that can be broken down into smaller, similar subproblems.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore recursive function implementation in Python to solve problems such as factorial calculation, Fibonacci sequence generation, and tree traversal.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of recursive function (factorial calculation)
+def factorial(n):
+  if n == 0:
+      return 1
+  else:
+      return n * factorial(n - 1)
+
+# Calculating factorial of 5
+result = factorial(5)
+print("Factorial of 5:", result)
+# Output: Factorial of 5: 120
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 75: Functions as Objects -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module75">
+      Module 75: Functions as Objects
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">In Python, functions are first-class objects, which means they can be assigned to variables, passed as arguments to other functions, returned from other functions, and stored in data structures.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how functions can be treated as objects in Python, allowing for advanced programming techniques such as higher-order functions and function decorators.</p>
+      <h5 class="card-title">Example:</h5>
+      <pre><code class="language-python">
+# Example of function as object
+def greet(name):
+  return "Hello, " + name + "!"
+
+# Assigning function to a variable
+greeting = greet
+print(greeting("Alice"))
+# Output: Hello, Alice!
+
+# Passing function as argument to another function
+def call_func(func, name):
+  return func(name)
+
+print(call_func(greet, "Bob"))
+# Output: Hello, Bob!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 76: Predefined Functions: Part 1 -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module76">
+      Module 76: Predefined Functions: Part 1
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Python provides a rich set of predefined functions that perform various tasks, such as mathematical operations, string manipulation, input/output, data type conversion, and more.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Introduce some commonly used predefined functions in Python and illustrate their usage in different scenarios.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of built-in functions: Part 1
+# Mathematical functions
+print("Absolute value of -5:", abs(-5))  # Output: Absolute value of -5: 5
+print("Minimum value:", min(5, 3, 9))     # Output: Minimum value: 3
+print("Maximum value:", max(5, 3, 9))     # Output: Maximum value: 9
+
+# String functions
+print("Uppercase:", "hello".upper())     # Output: Uppercase: HELLO
+print("Length:", len("hello"))            # Output: Length: 5
+
+# Type conversion functions
+num_str = "123"
+num = int(num_str)
+print("Converted integer:", num)          # Output: Converted integer: 123
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 77: Predefined Functions: Part 2 -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module77">
+      Module 77: Predefined Functions: Part 2
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Continuation of introducing commonly used predefined functions in Python, covering additional functions for list manipulation, formatting, and more.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate the usage of predefined functions for various tasks such as list operations, string formatting, and getting user input.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of built-in functions: Part 2
+# List functions
+numbers = [1, 2, 3, 4, 5]
+print("Sum of numbers:", sum(numbers))          # Output: Sum of numbers: 15
+print("Sorted list:", sorted(numbers))          # Output: Sorted list: [1, 2, 3, 4, 5]
+
+# String formatting
+name = "Alice"
+age = 30
+print("Name: {}, Age: {}".format(name, age))   # Output: Name: Alice, Age: 30
+
+# Input/output functions
+user_input = input("Enter your name: ")
+print("Hello,", user_input)                     # Output: Hello, [user_input]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 78: Predefined Functions: Part 3 -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module78">
+      Module 78: Predefined Functions: Part 3
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Continuation of introducing commonly used predefined functions in Python, covering additional functions for file operations, random number generation, and more.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate the usage of predefined functions for tasks such as file handling, generating random numbers, and working with dates and times.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of built-in functions: Part 3
+# File functions
+file = open("example.txt", "w")
+file.write("Hello, World!")
+file.close()
+
+# Random number generation
+import random
+print("Random number between 1 and 100:", random.randint(1, 100))
+
+# Date and time functions
+import datetime
+current_time = datetime.datetime.now()
+print("Current date and time:", current_time)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 79: Introduction to Object-Oriented Programming -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module79">
+      Module 79: Introduction to Object-Oriented Programming
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Object-Oriented Programming (OOP) is a programming paradigm that uses "objects" to represent data and methods to operate on that data. It emphasizes modularity, reusability, and encapsulation.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Introduce the basic concepts of OOP, including classes, objects, inheritance, and polymorphism, and their relevance in modern software development.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of defining a class
+class Dog:
+  # Constructor method
+  def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  # Method to bark
+  def bark(self):
+      return "Woof!"
+
+# Creating an object of the Dog class
+my_dog = Dog("Buddy", 3)
+print("Name:", my_dog.name)    # Output: Name: Buddy
+print("Age:", my_dog.age)      # Output: Age: 3
+print("Bark:", my_dog.bark())  # Output: Bark: Woof!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 80: Class and Object -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module80">
+      Module 80: Class and Object
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A class is a blueprint for creating objects, which are instances of the class. An object is an instance of a class, representing a specific entity with its own data and behavior.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate the relationship between classes and objects in Python and how to create and use them effectively to model real-world entities.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of using class and object
+class Car:
+  # Constructor method
+  def __init__(self, make, model):
+      self.make = make
+      self.model = model
+  
+  # Method to get car details
+  def get_details(self):
+      return f"Car: {self.make} {self.model}"
+
+# Creating objects of the Car class
+car1 = Car("Toyota", "Corolla")
+car2 = Car("Honda", "Civic")
+
+print(car1.get_details())  # Output: Car: Toyota Corolla
+print(car2.get_details())  # Output: Car: Honda Civic
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 81: Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module81">
+      Module 81: Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Inheritance is a mechanism in OOP that allows a new class (subclass) to inherit properties and behavior (methods) from an existing class (superclass). It promotes code reuse and modularity.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to use inheritance in Python to create new classes based on existing ones and extend or override their functionality as needed.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of inheritance
+class Animal:
+  def __init__(self, name):
+      self.name = name
+  
+  def sound(self):
+      pass
+
+# Subclass Dog inheriting from Animal
+class Dog(Animal):
+  def sound(self):
+      return "Woof!"
+
+# Subclass Cat inheriting from Animal
+class Cat(Animal):
+  def sound(self):
+      return "Meow!"
+
+# Creating objects of the subclasses
+dog = Dog("Buddy")
+cat = Cat("Whiskers")
+
+print(dog.sound())  # Output: Woof!
+print(cat.sound())  # Output: Meow!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 82: Polymorphism -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module82">
+      Module 82: Polymorphism
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Polymorphism is the ability of different objects to respond to the same message or method invocation in different ways. It allows for flexibility and code reuse by treating objects of different classes uniformly.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore how polymorphism works in Python by leveraging inheritance and method overriding to create flexible and extensible code that can handle different types of objects uniformly.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of polymorphism
+class Shape:
+  def area(self):
+      pass
+
+# Subclass Circle
+class Circle(Shape):
+  def __init__(self, radius):
+      self.radius = radius
+  
+  def area(self):
+      return 3.14 * self.radius * self.radius
+
+# Subclass Rectangle
+class Rectangle(Shape):
+  def __init__(self, width, height):
+      self.width = width
+      self.height = height
+  
+  def area(self):
+      return self.width * self.height
+
+# Function to calculate area of any shape
+def calculate_area(shape):
+  return shape.area()
+
+# Creating objects of different shapes
+circle = Circle(5)
+rectangle = Rectangle(4, 6)
+
+print("Area of circle:", calculate_area(circle))       # Output: Area of circle: 78.5
+print("Area of rectangle:", calculate_area(rectangle)) # Output: Area of rectangle: 24
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 83: Single Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module83">
+      Module 83: Single Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Single inheritance is a type of inheritance in which a subclass inherits from only one superclass. It forms a chain of classes, allowing properties and methods to be passed down from the superclass to the subclass.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how single inheritance works in Python by creating a simple hierarchy of classes where each subclass inherits from a single superclass.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of single inheritance
+class Animal:
+  def sound(self):
+      pass
+
+# Subclass Dog inheriting from Animal
+class Dog(Animal):
+  def sound(self):
+      return "Woof!"
+
+# Subclass Cat inheriting from Animal
+class Cat(Animal):
+  def sound(self):
+      return "Meow!"
+
+dog = Dog()
+cat = Cat()
+
+print(dog.sound())  # Output: Woof!
+print(cat.sound())  # Output: Meow!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 84: Multiple Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module84">
+      Module 84: Multiple Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Multiple inheritance is a type of inheritance in which a subclass inherits from more than one superclass. It allows a class to combine features and behavior from multiple parent classes.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore how multiple inheritance works in Python by creating a class hierarchy where a subclass inherits from multiple superclasses and inherits their properties and methods.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of multiple inheritance
+class A:
+  def method_A(self):
+      return "Method A"
+
+class B:
+  def method_B(self):
+      return "Method B"
+
+# Subclass C inheriting from A and B
+class C(A, B):
+  pass
+
+obj = C()
+print(obj.method_A())  # Output: Method A
+print(obj.method_B())  # Output: Method B
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 85: Multilevel Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module85">
+      Module 85: Multilevel Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Multilevel inheritance is a type of inheritance in which a subclass inherits from a superclass, and then another subclass inherits from that subclass. It forms a chain of classes with each class having its own properties and methods.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how multilevel inheritance works in Python by creating a hierarchy of classes where each subclass inherits from another subclass, forming a chain of inheritance.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of multilevel inheritance
+class Animal:
+  def sound(self):
+      return "Sound"
+
+# Subclass Dog inheriting from Animal
+class Dog(Animal):
+  def bark(self):
+      return "Woof!"
+
+# Subclass Labrador inheriting from Dog
+class Labrador(Dog):
+  def color(self):
+      return "Golden"
+
+labrador = Labrador()
+print(labrador.sound())  # Output: Sound
+print(labrador.bark())   # Output: Woof!
+print(labrador.color())  # Output: Golden
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 86: Hierarchical Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module86">
+      Module 86: Hierarchical Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Hierarchical inheritance is a type of inheritance in which multiple subclasses inherit from the same superclass. It allows sharing common features among different subclasses while providing flexibility for customization.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how hierarchical inheritance works in Python by creating a superclass and multiple subclasses that inherit from it, sharing common properties and methods while also having their own unique features.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of hierarchical inheritance
+class Animal:
+  def sound(self):
+      pass
+
+# Subclasses Dog and Cat inheriting from Animal
+class Dog(Animal):
+  def bark(self):
+      return "Woof!"
+
+class Cat(Animal):
+  def meow(self):
+      return "Meow!"
+
+dog = Dog()
+cat = Cat()
+
+print(dog.bark())  # Output: Woof!
+print(cat.meow())  # Output: Meow!
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 87: Hybrid Inheritance -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module87">
+      Module 87: Hybrid Inheritance
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Hybrid inheritance is a combination of multiple inheritance types within a single program. It allows for flexibility in designing class hierarchies by incorporating features from different inheritance patterns.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how hybrid inheritance works in Python by creating a class hierarchy that combines multiple inheritance types, such as single, multiple, multilevel, or hierarchical inheritance.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of hybrid inheritance
+class A:
+  def method_A(self):
+      return "Method A"
+
+class B(A):
+  def method_B(self):
+      return "Method B"
+
+class C(A):
+  def method_C(self):
+      return "Method C"
+
+class D(B, C):
+  def method_D(self):
+      return "Method D"
+
+# Subclass E inheriting from D
+class E(D):
+  pass
+
+obj = E()
+print(obj.method_A())  # Output: Method A
+print(obj.method_B())  # Output: Method B
+print(obj.method_C())  # Output: Method C
+print(obj.method_D())  # Output: Method D
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 88: Encapsulation -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module88">
+      Module 88: Encapsulation
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Encapsulation is the bundling of data and methods that operate on that data into a single unit called a class. It allows for data hiding and abstraction, protecting the internal state of an object from outside interference.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how encapsulation works in Python by creating a class with private attributes and methods, and accessing them using public methods, thereby achieving data hiding and abstraction.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of encapsulation
+class Car:
+  def __init__(self, make, model):
+      self.__make = make
+      self.__model = model
+  
+  def get_make(self):
+      return self.__make
+  
+  def get_model(self):
+      return self.__model
+
+# Creating an object of the Car class
+car = Car("Toyota", "Corolla")
+
+print(car.get_make())   # Output: Toyota
+print(car.get_model())  # Output: Corolla
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 89: Method Overloading -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module89">
+      Module 89: Method Overloading
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Method overloading is a feature of some programming languages that allows a class to have multiple methods with the same name but different signatures (number or types of parameters). It provides flexibility in method invocation and enhances code readability.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Explore how method overloading can be simulated in Python by using default parameter values or variable-length argument lists to define multiple versions of a method with the same name but different parameters.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of method overloading using default parameter values
+class Calculator:
+  def add(self, a, b=0):
+      return a + b
+
+# Creating an object of the Calculator class
+calc = Calculator()
+
+print(calc.add(5))      # Output: 5
+print(calc.add(3, 7))   # Output: 10
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 90: Operator Overloading -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module90">
+      Module 90: Operator Overloading
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Operator overloading is a feature of some programming languages that allows operators to be overloaded, meaning they can be redefined for custom types to perform specific operations. It enables intuitive and natural syntax for user-defined types.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how operator overloading works in Python by defining special methods (e.g., __add__, __sub__, __mul__) to customize the behavior of operators for user-defined classes, such as adding two objects together using the '+' operator.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of operator overloading
+class Point:
+  def __init__(self, x, y):
+      self.x = x
+      self.y = y
+  
+  def __add__(self, other):
+      return Point(self.x + other.x, self.y + other.y)
+
+# Creating Point objects
+p1 = Point(1, 2)
+p2 = Point(3, 4)
+
+result = p1 + p2
+print(result.x, result.y)  # Output: 4 6
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 91: Importing Standard Library -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module91">
+      Module 91: Importing Standard Library
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The standard library in Python consists of a set of modules and packages that provide commonly-used functionality for various tasks, such as file I/O, string manipulation, math operations, and more. These modules are available by default with Python installation.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to import and use modules from the Python standard library by importing modules such as 'math', 'random', 'os', 'sys', etc., and utilizing their functions and classes in a Python program.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of importing standard library modules
+import math
+import random
+import os
+import sys
+
+# Using functions from the 'math' module
+print(math.sqrt(16))  # Output: 4.0
+
+# Using functions from the 'random' module
+print(random.randint(1, 10))  # Output: Random integer between 1 and 10
+
+# Using functions from the 'os' module
+print(os.getcwd())  # Output: Current working directory
+
+# Using functions from the 'sys' module
+print(sys.platform)  # Output: Platform identifier
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 92: Importing Third-Party Libraries -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module92">
+      Module 92: Importing Third-Party Libraries
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Third-party libraries in Python are external packages or modules developed by individuals or organizations that provide additional functionality beyond what's available in the standard library. These libraries need to be installed separately using package managers like pip.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to import and use third-party libraries in Python by installing popular libraries such as 'numpy', 'pandas', 'matplotlib', 'requests', etc., and importing their modules to leverage their functionality in a Python program.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of importing third-party libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import requests
+
+# Using functions from the 'numpy' library
+arr = np.array([1, 2, 3, 4, 5])
+print(np.mean(arr))  # Output: Mean of the array
+
+# Using functions from the 'pandas' library
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+print(df)  # Output: DataFrame representation
+
+# Using functions from the 'matplotlib' library
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Plot')
+plt.show()
+
+# Using functions from the 'requests' library
+response = requests.get('https://api.github.com')
+print(response.status_code)  # Output: Status code
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 93: Working with datetime -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module93">
+      Module 93: Working with datetime
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">The datetime module in Python provides classes for manipulating dates and times. It allows developers to work with dates, times, and time intervals, perform arithmetic operations on them, and format them according to various standards.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to use the datetime module to perform common tasks such as getting the current date and time, creating custom date objects, parsing date strings, performing arithmetic operations, and formatting dates for display.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with datetime module
+import datetime
+
+# Getting current date and time
+current_datetime = datetime.datetime.now()
+print(current_datetime)
+
+# Creating custom date objects
+custom_date = datetime.datetime(2023, 4, 15)
+print(custom_date)
+
+# Parsing date strings
+date_string = '2023-04-15'
+parsed_date = datetime.datetime.strptime(date_string, '%Y-%m-%d')
+print(parsed_date)
+
+# Performing arithmetic operations
+difference = custom_date - current_datetime
+print(difference.days)
+
+# Formatting dates
+formatted_date = custom_date.strftime('%Y-%m-%d')
+print(formatted_date)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 94: Working with JSON -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module94">
+      Module 94: Working with JSON
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write, and easy for machines to parse and generate. Python provides built-in support for working with JSON data through the json module.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to use the json module in Python to encode Python objects into JSON strings and decode JSON strings into Python objects. Also, demonstrate reading and writing JSON data from files.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with JSON
+import json
+
+# Encoding Python objects into JSON
+data = {'name': 'John', 'age': 30, 'city': 'New York'}
+json_string = json.dumps(data)
+print(json_string)
+
+# Decoding JSON strings into Python objects
+decoded_data = json.loads(json_string)
+print(decoded_data)
+
+# Reading JSON data from a file
+with open('data.json', 'r') as file:
+  json_data = json.load(file)
+  print(json_data)
+
+# Writing JSON data to a file
+with open('output.json', 'w') as file:
+  json.dump(data, file)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 95: Lists -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module95">
+      Module 95: Lists
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Lists are one of the most versatile and commonly used data structures in Python. They are ordered collections of items, which can be of any data type, and allow for easy manipulation, iteration, and modification of data.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to create, access, modify, and iterate over lists in Python. Also, illustrate common list operations such as appending, inserting, removing, slicing, and sorting.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with lists
+# Creating a list
+my_list = [1, 2, 3, 4, 5]
+
+# Accessing elements
+print(my_list[0])  # Output: 1
+
+# Modifying elements
+my_list[0] = 10
+print(my_list)  # Output: [10, 2, 3, 4, 5]
+
+# Appending elements
+my_list.append(6)
+print(my_list)  # Output: [10, 2, 3, 4, 5, 6]
+
+# Inserting elements
+my_list.insert(1, 20)
+print(my_list)  # Output: [10, 20, 2, 3, 4, 5, 6]
+
+# Removing elements
+my_list.remove(3)
+print(my_list)  # Output: [10, 20, 2, 4, 5, 6]
+
+# Slicing
+print(my_list[1:4])  # Output: [20, 2, 4]
+
+# Sorting
+my_list.sort()
+print(my_list)  # Output: [2, 4, 5, 6, 10, 20]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 96: Tuples -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module96">
+      Module 96: Tuples
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Tuples are ordered collections of items, similar to lists, but with one key difference: they are immutable, meaning their elements cannot be changed after creation. Tuples are commonly used to represent fixed collections of data.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to create, access, and iterate over tuples in Python. Also, demonstrate their immutability and how to use tuple packing and unpacking to assign multiple values at once.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with tuples
+# Creating a tuple
+my_tuple = (1, 2, 3, 4, 5)
+
+# Accessing elements
+print(my_tuple[0])  # Output: 1
+
+# Iterating over elements
+for item in my_tuple:
+  print(item)
+
+# Tuple packing and unpacking
+x, y, z = 1, 2, 3
+print(x, y, z)  # Output: 1 2 3
+
+# Immutable nature
+# my_tuple[0] = 10  # This will raise an error
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 97: Sets -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module97">
+      Module 97: Sets
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Sets are unordered collections of unique elements in Python. They are similar to mathematical sets and support various set operations such as union, intersection, difference, and symmetric difference.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to create, modify, and perform operations on sets in Python. Also, illustrate their usefulness in removing duplicate elements from lists and checking membership efficiently.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with sets
+# Creating a set
+my_set = {1, 2, 3, 4, 5}
+
+# Adding elements
+my_set.add(6)
+print(my_set)  # Output: {1, 2, 3, 4, 5, 6}
+
+# Removing elements
+my_set.remove(3)
+print(my_set)  # Output: {1, 2, 4, 5, 6}
+
+# Set operations
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1.union(set2))  # Output: {1, 2, 3, 4, 5}
+print(set1.intersection(set2))  # Output: {3}
+print(set1.difference(set2))  # Output: {1, 2}
+print(set1.symmetric_difference(set2))  # Output: {1, 2, 4, 5}
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 98: Dictionaries -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module98">
+      Module 98: Dictionaries
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">Dictionaries are unordered collections of key-value pairs in Python. They are extremely flexible and efficient for mapping keys to values, making them ideal for various tasks such as storing settings, caching data, and representing real-world entities.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to create, access, modify, and iterate over dictionaries in Python. Also, demonstrate common dictionary operations such as adding, removing, and updating key-value pairs, as well as accessing keys and values.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of working with dictionaries
+# Creating a dictionary
+my_dict = {'name': 'John', 'age': 30, 'city': 'New York'}
+
+# Accessing elements
+print(my_dict['name'])  # Output: John
+
+# Modifying elements
+my_dict['age'] = 35
+print(my_dict)  # Output: {'name': 'John', 'age': 35, 'city': 'New York'}
+
+# Adding elements
+my_dict['gender'] = 'Male'
+print(my_dict)  # Output: {'name': 'John', 'age': 35, 'city': 'New York', 'gender': 'Male'}
+
+# Removing elements
+del my_dict['city']
+print(my_dict)  # Output: {'name': 'John', 'age': 35, 'gender': 'Male'}
+
+# Iterating over elements
+for key, value in my_dict.items():
+  print(key, value)
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 99: Stacks -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module99">
+      Module 99: Stacks
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A stack is a data structure that follows the Last In, First Out (LIFO) principle, where the last element added is the first one to be removed. Stacks are commonly used in various applications such as expression evaluation, function call management, and backtracking algorithms.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to implement and use a stack in Python. Show how to perform basic stack operations such as push (addition), pop (removal), and peek (accessing the top element), as well as checking for empty and full conditions.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of implementing a stack in Python
+class Stack:
+  def __init__(self):
+      self.items = []
+
+  def is_empty(self):
+      return self.items == []
+
+  def push(self, item):
+      self.items.append(item)
+
+  def pop(self):
+      if not self.is_empty():
+          return self.items.pop()
+
+  def peek(self):
+      if not self.is_empty():
+          return self.items[-1]
+
+  def size(self):
+      return len(self.items)
+
+# Using the stack
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+print(stack.peek())  # Output: 3
+print(stack.pop())   # Output: 3
+print(stack.size())  # Output: 2
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 100: Queues -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" id="module100">
+      Module 100: Queues
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A queue is a data structure that follows the First In, First Out (FIFO) principle, where the first element added is the first one to be removed. Queues are commonly used in various applications such as task scheduling, event handling, and breadth-first search algorithms.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to implement and use a queue in Python. Show how to perform basic queue operations such as enqueue (addition), dequeue (removal), and peek (accessing the front element), as well as checking for empty and full conditions.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of implementing a queue in Python
+class Queue:
+  def __init__(self):
+      self.items = []
+
+  def is_empty(self):
+      return self.items == []
+
+  def enqueue(self, item):
+      self.items.append(item)
+
+  def dequeue(self):
+      if not self.is_empty():
+          return self.items.pop(0)
+
+  def peek(self):
+      if not self.is_empty():
+          return self.items[0]
+
+  def size(self):
+      return len(self.items)
+
+# Using the queue
+queue = Queue()
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+print(queue.peek())  # Output: 1
+print(queue.dequeue())  # Output: 1
+print(queue.size())  # Output: 2
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Module 101: Heaps -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      Module 101: Heaps
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A heap is a specialized tree-based data structure that satisfies the heap property, where the parent node is either greater than or equal to (max heap) or less than or equal to (min heap) its child nodes. Heaps are commonly used in priority queues and graph algorithms.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Illustrate how to implement and use a heap in Python. Show how to perform basic heap operations such as insertion, deletion, and heapify, as well as extracting the minimum or maximum element.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of implementing a min-heap in Python using heapq module
+import heapq
+
+# Creating a heap
+heap = []
+
+# Inserting elements
+heapq.heappush(heap, 3)
+heapq.heappush(heap, 2)
+heapq.heappush(heap, 1)
+print(heap)  # Output: [1, 3, 2]
+
+# Extracting minimum element
+min_element = heapq.heappop(heap)
+print(min_element)  # Output: 1
+print(heap)  # Output: [2, 3]
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Module 102: Linked Lists -->
+<div class="row">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      Module 102: Linked Lists
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Definition:</h5>
+      <p class="card-text">A linked list is a linear data structure consisting of a sequence of elements where each element points to the next one in the sequence. Linked lists offer efficient insertion and deletion operations compared to arrays, but have slower access times due to their sequential nature.</p>
+      <h5 class="card-title">Scenario:</h5>
+      <p class="card-text">Demonstrate how to implement and use linked lists in Python. Show how to perform basic linked list operations such as insertion, deletion, traversal, and searching, as well as illustrating different types of linked lists such as singly linked lists, doubly linked lists, and circular linked lists.</p>
+      <h5 class="card-title">Examples:</h5>
+      <pre><code class="language-python">
+# Example of implementing a singly linked list in Python
+class Node:
+  def __init__(self, data):
+      self.data = data
+      self.next = None
+
+class LinkedList:
+  def __init__(self):
+      self.head = None
+
+  def append(self, data):
+      new_node = Node(data)
+      if not self.head:
+          self.head = new_node
+          return
+      current = self.head
+      while current.next:
+          current = current.next
+      current.next = new_node
+
+  def display(self):
+      current = self.head
+      while current:
+          print(current.data, end=' -> ')
+          current = current.next
+      print('None')
+
+# Using the singly linked list
+ll = LinkedList()
+ll.append(1)
+ll.append(2)
+ll.append(3)
+ll.display()  # Output: 1 -> 2 -> 3 -> None
+      </code></pre>
+      <button class="btn btn-primary copy-btn">Copy Code</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+
+<footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+  <p>&copy; 2024 EducationWebsite. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Prism JS for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+<!-- Custom JavaScript for copying code -->
+<script>
+  document.querySelectorAll('.copy-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const codeElement = button.parentNode.querySelector('code');
+      const code = codeElement.innerText;
+      
+      // Create a textarea element to copy the code
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      
+      // Select and copy the code from the textarea
+      textarea.select();
+      document.execCommand('copy');
+      
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+      
+      // Change button text to indicate code is copied
+      button.innerText = 'Code Copied';
+      setTimeout(() => {
+        button.innerText = 'Copy Code';
+      }, 2000); // Reset button text after 2 seconds
+    });
+  });
+</script>
+
+<script>
+// Function to toggle navigation
+function toggleNav() {
+var sideNav = document.getElementById("sideNav");
+var mainContent = document.querySelector(".main-content");
+if (sideNav.style.width === "250px") {
+  sideNav.style.width = "0";
+  mainContent.style.marginLeft = "0";
+} else {
+  sideNav.style.width = "250px";
+  mainContent.style.marginLeft = "250px"; // Adjust this value according to the width of your side nav
+}
+}
+
+// Function to close the navigation
+function closeNav() {
+document.getElementById("sideNav").style.width = "0";
+document.querySelector(".main-content").style.marginLeft = "0";
+}
+
+// Close navigation when clicking anywhere on the webpage
+window.onclick = function(event) {
+if (!event.target.matches('.navbar-toggle')) {
+  closeNav();
+}
+}
+
+</script>
+<script>
+  window.addEventListener('load', function(){
+document.querySelector('.preloader').style.display = 'none';
+});
+</script>
+
+  </body>
+</html>
